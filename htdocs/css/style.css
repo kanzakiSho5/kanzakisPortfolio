@@ -1,130 +1,115 @@
 body {
-    margin: 0;
-    overflow: hidden;
-
-    /*文字の選択を不可*/
-    -webkit-user-select: none;  /* Chrome all / Safari all */
-    -moz-user-select: none;     /* Firefox all */
-    -ms-user-select: none;      /* IE 10+ */
-    user-select: none;          /* Likely future */
+  margin: 0;
+  overflow: hidden;
+  /*文字の選択を不可*/
+  -webkit-user-select: none;
+  /* Chrome all / Safari all */
+  -moz-user-select: none;
+  /* Firefox all */
+  -ms-user-select: none;
+  /* IE 10+ */
+  user-select: none;
+  /* Likely future */
 }
 
-.title{
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-
-    margin: auto;
-    height: 100px;
-    line-height: 100px;
-
-    color: white;
-    font-size: 100px;
-    text-align: center;
-
-    transition: transform 2s;
+.title {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  height: 100px;
+  line-height: 100px;
+  color: white;
+  font-size: 100px;
+  text-align: center;
+  transition: transform 2s;
 }
 
-.content{
-
+.content {
   margin: 0;
   padding: 0;
   width: 100vw;
   height: 100vh;
-
-  top:0:
-  left:0;
-  right:0;
+  top: 0: left:0;
+  right: 0;
   bottom: 0;
-
   position: absolute;
   transition: all 2s;
 }
 
-.main-container{
-    margin:0;
-    padding: 0;
-    width: 100vw;
-    height:100vh;
-
-    top:0;
-    bottom: 0;
-    left:0;
-    right: 0;
-
-    filter: blur(10px);
-
-    position: absolute;
+.main-container {
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  position: absolute;
 }
 
-.main_container::before{
-    filter: blur(10px);
+#profile-main .main-content {
+  width: 100%;
+  height: 100%;
+  margin: 50px;
+  position: relative;
 }
 
-#profile-main .main-content{
-    width: 100%;
-    height: 100%;
-
-    margin: 50px;
-
-    position: relative;
+#profile-main .main-content h2 {
+  margin: auto;
+  font-size: 2em;
+  top: 0;
+  bottom: 0;
+  left: 20px;
+  position: absolute;
 }
 
-#profile-main .main-content h2{
-    margin: auto;
-    font-size: 2em;
-    top:0;
-    bottom:0;
-    left:20px;
-
-    position: absolute;
+.scene-btn {
+  position: absolute;
+  height: 100px;
+  width: 100px;
+  margin: auto;
+  background-color: blue;
+  z-index: 10;
 }
 
-.scene-btn{
-    position: absolute;
-
-    height: 100px;
-    width: 100px;
-    margin: auto;
-
-    background-color: blue;
-    z-index: 10;
+#left_btn {
+  left: 0;
+  top: 0;
+  bottom: 0;
 }
 
-#left_btn{
-    left:0;
-    top:0;
-    bottom:0;
+#right_btn {
+  right: 0;
+  top: 0;
+  bottom: 0;
 }
 
-#right_btn{
-    right:0;
-    top:0;
-    bottom: 0;
+#bottom_btn {
+  right: 0;
+  left: 0;
+  bottom: 0;
 }
 
-#bottom_btn{
-    right:0;
-    left:0;
-    bottom: 0;
+.top-content {
+  transform: rotateX(90deg) translateZ(900px);
 }
 
-.top-content{
-    transform: rotateX(90deg) translateZ(900px);
+.bottom-content {
+  transform: rotateX(-90deg) translateZ(900px);
 }
 
-.bottom-content{
-    transform: rotateX(-90deg) translateZ(900px);
-}
-
-.right-content{
+.right-content {
   transform: rotateY(90deg) translateZ(900px);
 }
-.left-content{
+
+.left-content {
   transform: rotateY(-90deg) translateZ(900px);
 }
-.center-content{
+
+.center-content {
   transform: rotateY(0deg) translateZ(900px);
 }
