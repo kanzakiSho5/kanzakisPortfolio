@@ -244,7 +244,10 @@ $(function() {
         $titles[currentScene]
           .removeClass("center-content")
           .addClass("top-content");
-      openContentPage++;
+      if(openContentPage >= $main_contents[currentScene].length - 1)
+        $bottom_btn.hide();
+      else
+        openContentPage++;
     }
   }
 
@@ -255,6 +258,7 @@ $(function() {
     if (currentTime > 1) {
       openContentPage--;
       currentTime = 0;
+      $bottom_btn.show();
       if(openContentPage >= 0)
       $($main_contents[currentScene][openContentPage])
         .addClass("center-content")
@@ -266,7 +270,7 @@ $(function() {
       $($main_contents[currentScene][openContentPage + 1])
         .addClass("bottom-content")
         .removeClass("center-content");
-
+      if(openContentPage <= 0) openContentPage = 0;
     }
   }
 

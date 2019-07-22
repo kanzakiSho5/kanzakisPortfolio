@@ -165,7 +165,6 @@ body {
   height: 100px;
   width: 100px;
   margin: auto;
-  background-color: blue;
   z-index: 10;
 }
 
@@ -190,18 +189,24 @@ body {
   left: 0;
   top: 0;
   bottom: 0;
+  background-image: url(../img/leftArrow.png);
+  background-size:cover;
 }
 
 #right_btn {
   right: 0;
   top: 0;
   bottom: 0;
+  background-image: url(../img/rightArrow.png);
+  background-size:cover;
 }
 
 #bottom_btn {
   right: 0;
   left: 0;
   bottom: 0;
+  background-image: url(../img/DownArrow.png);
+  background-size:cover;
 }
 
 .top-content {
