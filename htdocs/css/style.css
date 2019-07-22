@@ -9,7 +9,9 @@ body {
   -ms-user-select: none;
   /* IE 10+ */
   user-select: none;
-  /* Likely future */
+
+  font-family: 'Sawarabi Gothic', sans-serif;
+  color: white;
 }
 
 .title {
@@ -19,12 +21,15 @@ body {
   top: 0;
   bottom: 0;
   margin: auto;
-  height: 100px;
-  line-height: 100px;
+  height: 200px;
+  line-height: 200px;
+  vertical-align: middle;
   color: white;
-  font-size: 100px;
+  font-size: 200px;
   text-align: center;
   transition: transform 2s;
+
+  font-family: 'Raleway', sans-serif;
 }
 
 .content {
@@ -44,27 +49,115 @@ body {
   padding: 0;
   width: 100vw;
   height: 100vh;
+
   top: 0;
   bottom: 0;
   left: 0;
   right: 0;
+
+
   position: absolute;
 }
 
-#profile-main .main-content {
+.main-container .main-content {
+  background-color: black;
   width: 100%;
   height: 100%;
-  margin: 50px;
-  position: relative;
+
+  margin: 0;
+  padding: 0;
+
+  transition: transform 2s;
+  position: absolute;
 }
 
-#profile-main .main-content h2 {
-  margin: auto;
-  font-size: 2em;
+.main-container .main-content h2 {
+  margin: 100px 0 0 0;
+  padding: 0;
+  font-size: 5em;
+
   top: 0;
   bottom: 0;
-  left: 20px;
+  left: 10%;
+
+  font-family: 'Raleway', sans-serif;
   position: absolute;
+}
+
+.main-content dl{
+  margin: 20vh 5% 20vh 50%;
+  padding: 0;
+
+  top:0;
+  bottom: 0;
+  right: 0;
+  left:0;
+
+  height: 60%;
+  width: 45%;
+
+  position: absolute;
+}
+
+.main-content > img{
+  background-color: white;
+
+  top:300px;
+  left:15%;
+
+  width: 600px;
+  height: 450px;
+
+  position: absolute;
+}
+
+.main-content dt{
+  margin: 20px 0;
+  font-size: 3em;
+}
+
+.main-content dd{
+  font-size: 2em;
+}
+
+.main-content ul {
+  margin-left: 10%;
+  margin-top: 200px;
+  width: 80%;
+  list-style-type: none;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.main-content li{
+  width: 50%;
+  box-sizing: border-box;
+}
+
+.main-content li img {
+  width: 50px;
+  height: 50px;
+}
+
+.main-content li dt{
+  margin: 0;
+  margin-top: 10px;
+}
+
+.main-content li dd{
+  font-size: 30px;
+  line-height: 34px;
+}
+
+.main-content .works-links{
+  margin-left:50%;
+  margin-top: 70vh;
+
+  width: 70%;
+}
+
+.works-links li{
+  width: 10%;
 }
 
 .scene-btn {
@@ -74,6 +167,23 @@ body {
   margin: auto;
   background-color: blue;
   z-index: 10;
+}
+
+.btn-flat-border {
+  position: relative;
+  display: inline-block;
+  padding: 0.3em 1em;
+  text-decoration: none;
+  color: #67c5ff;
+  border: solid 2px #67c5ff;
+  border-radius: 3px;
+  transition: .4s;
+  z-index: 20;
+}
+
+.btn-flat-border:hover {
+  background: #67c5ff;
+  color: white;
 }
 
 #left_btn {

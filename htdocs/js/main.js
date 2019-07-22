@@ -7,7 +7,12 @@ $(function() {
   const $bottom_btn = $("#bottom_btn");
   const $contents = [$("#top"), $("#profile"), $("#works")];
   const $titles = [$("#top-title"), $("#profile-title"), $("#works-title")];
-  const $main_contents = [$("#top-main"), $("#profile-main"), $("#works-main")];
+  const $main_contents =
+    [
+      $("#top-main").find(".main-content"),
+      $("#profile-main").find(".main-content"),
+      $("#works-main").find(".main-content")
+    ];
 
   const Clock = new THREE.Clock();
 
@@ -17,7 +22,7 @@ $(function() {
 
   var lateScene = 0;
 
-  var isOpenContent = false;
+  var openContentPage = 0;
 
   var width = window.innerWidth;
   var height = window.innerHeight;
@@ -31,9 +36,10 @@ $(function() {
   const camera = new THREE.PerspectiveCamera(45, width / height);
   const parentCam = new THREE.Group();
 
-  const geometry = new THREE.BoxGeometry(500, 500, 500);
+  const geometry = new THREE.BoxGeometry(50, 50, 50);
   const material = new THREE.MeshNormalMaterial();
   const boxes = blocks();
+  const boxValue = 20;
 
   //マウスホイール
   var mousewheelevent = 'onwheel' in document ? 'wheel' : 'onmousewheel' in document ? 'mousewheel' : 'DOMMouseScroll';
@@ -41,7 +47,6 @@ $(function() {
 
   function init() {
     onResize();
-
     scene.add(parentCam);
     parentCam.position.set(0, 0, +1000);
     parentCam.add(camera);
@@ -51,12 +56,15 @@ $(function() {
 
     boxes.forEach(function(item, index, array) {
       scene.add(item);
-      item.position.x += index * 80 * getRandomInt(10) - (array.length * 40);
-      item.position.y += index * 40 * getRandomInt(10) - (array.length * 20);
+      item.position.x += index * 50 * getRandomInt(2) - (array.length * 25);
+      item.position.y += index * 50 * getRandomInt(2) - (array.length * 25);
+      item.position.z += index * 50 * getRandomInt(2) - (array.length * 25);
     });
 
     SetScene(currentScene);
-
+    InitScene(1);
+    InitScene(2);
+    console.log("Inited!");
     tick();
   }
 
@@ -66,7 +74,7 @@ $(function() {
 
   function blocks() {
     var boxes = [];
-    for (var i = 0; i < 10; i++) {
+    for (var i = 0; i < 20; i++) {
       boxes.push(new THREE.Mesh(geometry, material));
     }
     return boxes;
@@ -74,7 +82,9 @@ $(function() {
 
   function tick() {
     boxes.forEach(function(item, index, array) {
-      //item.rotation.y += 0.01;
+      item.rotation.y += 0.01;
+      item.rotation.x += 0.01;
+      item.rotation.z += 0.01;
     });
 
     renderer.render(scene, camera);
@@ -127,10 +137,14 @@ $(function() {
   }
 
   function InitScene(scene) {
-    isOpenContent = false;
-    $main_contents[scene]
-      .addClass("bottom-content")
-      .removeClass("center-content");
+    openContentPage = 0;
+    $main_contents[scene].each(function(index, domEle){
+      //console.log("" + domEle);
+      $(domEle)
+        .addClass("bottom-content")
+        .removeClass("center-content");
+    });
+
     $titles[scene]
       .addClass("center-content")
       .removeClass("bottom-content");
@@ -213,30 +227,46 @@ $(function() {
   }
 
   function OnDownBtn() {
-    if (isOpenContent)
+    if (openContentPage >= $main_contents[currentScene].length)
       return;
-    if (currentTime > 2) {
-      isOpenContent = true;
+    console.log(openContentPage);
+      //console.log(""+ currentScene + "\n" + openContentPage + "\n" + $main_contents[currentScene][openContentPage]);
+    if (currentTime > 1) {
       currentTime = 0;
-      $main_contents[currentScene]
-        .addClass("center-content");
-      $titles[currentScene]
-        .removeClass("center-content")
-        .addClass("top-content");
+      $($main_contents[currentScene][openContentPage])
+        .addClass("center-content")
+        .removeClass("bottom-content");
+      if(openContentPage >= 1)
+        $($main_contents[currentScene][openContentPage - 1])
+          .removeClass("center-content")
+          .addClass("top-content");
+      else
+        $titles[currentScene]
+          .removeClass("center-content")
+          .addClass("top-content");
+      openContentPage++;
     }
   }
 
   function OnUpBtn() {
-    if (!isOpenContent)
+    if (openContentPage < 0)
       return;
-    if (currentTime > 2) {
-      isOpenContent = false;
+    console.log(openContentPage);
+    if (currentTime > 1) {
+      openContentPage--;
       currentTime = 0;
-      $main_contents[currentScene]
-        .removeClass("center-content")
-        .addClass("top-content");
-      $titles[currentScene]
-        .addClass("center-content");
+      if(openContentPage >= 0)
+      $($main_contents[currentScene][openContentPage])
+        .addClass("center-content")
+        .removeClass("top-content")
+      else
+        $titles[currentScene]
+          .removeClass("top-content")
+          .addClass("center-content");
+      $($main_contents[currentScene][openContentPage + 1])
+        .addClass("bottom-content")
+        .removeClass("center-content");
+
     }
   }
 
@@ -244,11 +274,11 @@ $(function() {
   Math.degToRad = function(degree) {
     return degree * (Math.PI / 180);
   }
-
+  // ラジアンを度に変換
   Math.radToDeg = function(radian) {
     return radian * (180 / Math.PI);
   }
-
+  // Lerp
   Math.lerp = function(start, end, amt) {
     return (1 - amt) * start + amt * end;
   }
@@ -276,11 +306,11 @@ $(function() {
     var delta = e.originalEvent.deltaY ? -(e.originalEvent.deltaY) : e.originalEvent.wheelDelta ? e.originalEvent.wheelDelta : -(e.originalEvent.detail);
     if (delta < 0) {
       // マウスホイールを下にスクロールしたときの処理を記載
-      console.log("down");
+      //console.log("down");
       OnDownBtn();
     } else {
       // マウスホイールを上にスクロールしたときの処理を記載
-      console.log("up");
+      //console.log("up");
       OnUpBtn();
     }
   });
@@ -297,4 +327,5 @@ $(function() {
   $bottom_btn.on("click", function() {
     OnDownBtn();
   });
+
 });
