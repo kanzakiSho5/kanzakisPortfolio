@@ -84,8 +84,20 @@ body {
   position: absolute;
 }
 
+.main-content > img{
+  background-color: white;
+
+  top:250px;
+  left:10%;
+
+  width: 600px;
+  height: 450px;
+
+  position: absolute;
+}
+
 .main-content dl{
-  margin: 20vh 5% 20vh 50%;
+  margin: 15vh 5% 25vh 50%;
   padding: 0;
 
   top:0;
@@ -99,18 +111,6 @@ body {
   position: absolute;
 }
 
-.main-content > img{
-  background-color: white;
-
-  top:300px;
-  left:15%;
-
-  width: 600px;
-  height: 450px;
-
-  position: absolute;
-}
-
 .main-content dt{
   margin: 20px 0;
   font-size: 3em;
@@ -118,6 +118,22 @@ body {
 
 .main-content dd{
   font-size: 2em;
+}
+
+.main-content .social-list{
+    margin-left: 50%;
+    margin-top: 80vh;
+    list-style-type: none;
+
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.main-content .social-list > li{
+    margin: 10px;
+    padding: 0;
+    width: 50px;
+    height: 50px;
 }
 
 .main-content ul {
